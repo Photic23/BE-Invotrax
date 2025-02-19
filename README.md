@@ -1,5 +1,10 @@
 # A06 - PropenChill - BE
 
+## NOTES BEFORE WORKING ON THE PROJECT
+1. JANGAN NYENTUH MAIN
+2. Kalo mau bikin fitur baru bikin branch baru dengan format "feat: nama-fitur" ex: feat: cari-jodoh
+3. Kalo mau push, push ke branch fitur lu dulu terus merge ke dev
+4. Sebelum merge ke dev, pastikan kalo fitur lu udah conflict free dengen dev
 
 
 ## Getting started
