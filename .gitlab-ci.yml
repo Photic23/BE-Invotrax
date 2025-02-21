@@ -1,4 +1,4 @@
-image: node:latest  # Node.js image (includes npm)
+image: node:latest  # Node.js image
 
 stages:
   - deploy
@@ -8,10 +8,11 @@ deploy:
   before_script:
     - apt-get update && apt-get install -y python3 python3-pip python3-venv
     - python3 -m venv venv  # Create virtual environment
-    - source venv/bin/activate  # Activate venv
-    - pip install -r requirements.txt  # Install Python dependencies inside venv
+    - source venv/bin/activate  # Activate virtual environment
+    - pip install -r requirements.txt  # Install Python dependencies
   script:
     - npm install -g vercel  # Install Vercel CLI
-    - vercel --prod --token=$VERCEL_TOKEN  # Deploy to Vercel
+    - vercel --prod --yes --token=$VERCEL_TOKEN  # Deploy to Vercel without confirmation
   only:
-    - dev  # Deploy only from 'dev' branch
+    - dev  # Deploy only from the 'dev' branch
+
