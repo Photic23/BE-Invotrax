@@ -1,6 +1,5 @@
-from django.core.wsgi import get_wsgi_application
-import os
+from be_invotrax.wsgi import application  # Import Django's WSGI application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "be_invotrax.settings")  # Adjust if your settings module is different
-
-app = get_wsgi_application()
+# Vercel expects a `handler` function
+def handler(event, context):
+    return application(event, context)
