@@ -6,6 +6,7 @@ stages:
 deploy:
   stage: deploy
   script:
+    - apt install nodejs npm -y
     - pip install -r requirements.txt
     - npm install -g vercel
     - vercel --prod --token=$VERCEL_TOKEN
