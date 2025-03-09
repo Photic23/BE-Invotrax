@@ -29,19 +29,26 @@ deploy:
   before_script:
     - apt-get update && apt-get install -y openssh-client
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/propenchill.pem  # Use same filename as locally
-    - chmod 600 ~/.ssh/propenchill.pem
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
     - echo -e "Host $LIGHTHOUSE_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   script:
-    # Use the identical syntax to what works for you locally
-    - ssh -i ~/.ssh/propenchill.pem $TENCENT_USER@$LIGHTHOUSE_HOST "mkdir -p $APP_DIR"
+    # Create directory structure if it doesn't exist
+    - sshpass -p "123ytrewq" ssh $TENCENT_USER@$LIGHTHOUSE_HOST "mkdir -p $APP_DIR"
     
-    # For all subsequent commands, use the same -i flag
-    - scp -i ~/.ssh/propenchill.pem -r ./* $TENCENT_USER@$LIGHTHOUSE_HOST:$APP_DIR/
+    # Deploy code to server
+    - scp -r ./* $TENCENT_USER@$LIGHTHOUSE_HOST:$APP_DIR/
     
-    # And for the rest of your ssh commands
-    - ssh -i ~/.ssh/propenchill.pem $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && python3 -m venv $VENV_PATH || true"
-    - ssh -i ~/.ssh/propenchill.pem $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && source $VENV_PATH/bin/activate && pip install -r requirements.txt"
-    # etc.
+    # Setup and activate virtual environment
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && python3 -m venv $VENV_PATH || true"
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && source $VENV_PATH/bin/activate && pip install -r requirements.txt"
+    
+    # Run Django commands
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && source $VENV_PATH/bin/activate && python manage.py migrate --noinput"
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "cd $APP_DIR && source $VENV_PATH/bin/activate && python manage.py collectstatic --noinput"
+    
+    # Restart services
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "sudo systemctl restart gunicorn"
+    - ssh $TENCENT_USER@$LIGHTHOUSE_HOST "sudo systemctl restart nginx"
   only:
     - dev
