@@ -163,7 +163,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': '/home/ubuntu/django-app/django-error.log',
+            'filename': '/home/propenchill/propenchill/django-error.log',
             'formatter': 'verbose',
         },
     },
