@@ -46,9 +46,9 @@ deploy:
     - sshpass -p "123ytrewq" ssh propenchill@$LIGHTHOUSE_HOST "cd $APP_DIR && python3 -m venv $VENV_PATH || true"
     - sshpass -p "123ytrewq" ssh propenchill@$LIGHTHOUSE_HOST "cd $APP_DIR && source $VENV_PATH/bin/activate && pip install -r requirements.txt"
     
-    # Fix database permissions
+    # Fix database permissions - using echo to pass password to sudo
     - |
-      sshpass -p "123ytrewq" ssh propenchill@$LIGHTHOUSE_HOST "sudo -u postgres psql -c \"
+      sshpass -p "123ytrewq" ssh propenchill@$LIGHTHOUSE_HOST "echo '123ytrewq' | sudo -S -u postgres psql -c \"
       GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DB_USER};
       \\c ${DB_NAME};
       GRANT USAGE ON SCHEMA public TO ${DB_USER};
