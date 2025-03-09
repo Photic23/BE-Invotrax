@@ -25,3 +25,6 @@ def test_db_connection(request):
             "message": str(e)
         }, status=500)
 # Create your views here.
+
+def test():
+    print("test")
