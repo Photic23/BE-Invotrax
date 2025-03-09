@@ -5,8 +5,8 @@ stages:
   - deploy
 
 variables:
-  APP_DIR: "/home/ubuntu/propenchill"
-  VENV_PATH: "/home/ubuntu/propenchill/venv"
+  APP_DIR: "/home/propenchill/propenchill"
+  VENV_PATH: "/home/propenchill/propenchill/venv"
 
 build:
   stage: build
