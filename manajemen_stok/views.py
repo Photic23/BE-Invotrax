@@ -27,6 +27,19 @@ class ProdukViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+    
+    @action(detail=True, methods=['get'], permission_classes=[permissions.AllowAny])
+    def detail_produk(self, request, pk=None):
+        produk = get_object_or_404(Produk, pk=pk, is_deleted=False)
+        serializer = self.get_serializer(produk)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['delete'], permission_classes=[permissions.AllowAny])
+    def hapus_produk(self, request, pk=None):
+        produk = get_object_or_404(Produk, pk=pk, is_deleted=False)
+        produk.is_deleted = True
+        produk.save()
+        return Response({"message": "Produk berhasil dihapus (soft delete)"}, status=200)
 
     @action(detail=True, methods=['patch'], permission_classes=[permissions.AllowAny])
     def update_stok(self, request, pk=None):
