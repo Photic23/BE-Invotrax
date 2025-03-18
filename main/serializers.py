@@ -7,7 +7,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'phone_number', 'address', 'company_name', 'role')
+        fields = ('id', 'username', 'email', 'phone_number', 'company_name', 'role')
         read_only_fields = ('id',)
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'phone_number', 'company_name', 'role')
+        fields = ('email', 'username', 'password', 'password2', 'phone_number', 'company_name', 'role')
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -25,5 +25,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop('password2')
+
+        # Set default role to 'customer' if not provided
+        if 'role' not in validated_data or not validated_data['role']:
+            validated_data['role'] = 'customer'
+
         user = User.objects.create_user(**validated_data)
         return user

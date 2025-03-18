@@ -68,8 +68,13 @@ class LoginView(APIView):
             return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
+            # Try to find user by email
             user_obj = User.objects.get(email=email)
+            # Try to authenticate with both email and username
             user = authenticate(request, email=email, password=password)
+            if not user:
+                # If email auth fails, try username auth
+                user = authenticate(request, username=user_obj.username, password=password)
         except User.DoesNotExist:
             user = None
         
