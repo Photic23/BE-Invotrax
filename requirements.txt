@@ -7,3 +7,8 @@ requests
 urllib3
 djangorestframework
 python-dotenv
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+python-decouple
+django-role-permissions
