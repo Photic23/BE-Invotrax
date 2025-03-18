@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'pengajuan_penawaran_pengadaan',
     # Third-party apps
     'rest_framework',
     'corsheaders',

@@ -12,3 +12,8 @@ django-cors-headers
 djangorestframework-simplejwt
 python-decouple
 django-role-permissions
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+python-decouple
+django-role-permissions
