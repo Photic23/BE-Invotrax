@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'manajemen_stok',
     'penawaran_pengadaan',
     # Third-party apps
     'rest_framework',
