@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class Kategori(models.Model):
     nama = models.CharField(max_length=255, unique=True)
@@ -12,7 +12,13 @@ class Kategori(models.Model):
 class Produk(models.Model):
     nama = models.CharField(max_length=255)
     kategori = models.ForeignKey(Kategori, on_delete=models.SET_NULL, null=True)
-    #supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
+    vendor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'role': 'vendor'}
+    )
     #kontrak = models.ForeignKey(Kontrak, on_delete=models.SET_NULL, null=True)
     stok = models.PositiveIntegerField()
     deskripsi = models.TextField(blank=True, null=True)

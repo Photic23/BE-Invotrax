@@ -19,6 +19,7 @@ class Staff(AbstractUserRole):
         'staff_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
+        'manage_staff': True,
     }
 
 class Manager(AbstractUserRole):
