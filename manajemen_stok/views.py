@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -15,12 +15,13 @@ class ProdukViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=['get'])
     def daftar_produk(self, request):
         produk_list = self.get_queryset()
         serializer = self.get_serializer(produk_list, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     @action(detail=True, methods=['patch'])
     def update_produk(self, request, pk=None):
@@ -28,8 +29,8 @@ class ProdukViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(produk, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @action(detail=True, methods=['get'])
     def detail_produk(self, request, pk=None):
@@ -53,6 +54,7 @@ class KategoriViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @action(detail=True, methods=['patch'])
     def update_kategori(self, request, pk=None):
@@ -60,11 +62,11 @@ class KategoriViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(kategori, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['get'])
     def daftar_kategori(self, request):
         kategori_list = self.get_queryset()
         serializer = self.get_serializer(kategori_list, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
