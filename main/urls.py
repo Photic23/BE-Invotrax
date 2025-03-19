@@ -14,7 +14,7 @@ urlpatterns = [
     
     
     # User management endpoints
-    path('admin/users/', views.UserManagementView.as_view(), name='user_list'),
-    path('admin/users/<int:user_id>/', views.UserManagementView.as_view(), name='user_detail'),
-    path('admin/users/<int:user_id>/permissions/', views.CustomPermissionView.as_view(), name='user_permissions'),
+    path('admins/users/', views.UserManagementView.as_view(), name='user_list'),
+    path('admins/users/<int:user_id>/', views.UserManagementView.as_view(), name='user_detail'),
+    path('admins/users/<int:user_id>/permissions/', views.CustomPermissionView.as_view(), name='user_permissions'),
 ]
