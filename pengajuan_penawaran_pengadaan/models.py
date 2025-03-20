@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 #     def __str__(self):
 #         return self.nama
 
-class PenawaranPengadaan(models.Model):
+class PengajuanPenawaranPengadaan(models.Model):
     STATUS_CHOICES = [
         ('diajukan', 'Diajukan'),
         ('diproses', 'Diproses'),
