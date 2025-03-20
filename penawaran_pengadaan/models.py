@@ -1,23 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# class Supplier(models.Model):
-#     nama = models.CharField(max_length=255, unique=True)
-#     kontak = models.CharField(max_length=255, blank=True, null=True)
-#     email = models.EmailField(blank=True, null=True)
-#     alamat = models.TextField(blank=True, null=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return self.nama
-
-# class Kategori(models.Model):
-#     nama = models.CharField(max_length=255, unique=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     is_deleted = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return self.nama
+from django.conf import settings
+from manajemen_stok.models import Kategori
 
 class PenawaranPengadaan(models.Model):
     STATUS_CHOICES = [
@@ -28,14 +12,19 @@ class PenawaranPengadaan(models.Model):
         ('diterima', 'Diterima'),
     ]
 
-    # supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
+    supplier_vendor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'role': 'vendor'}
+    )
     nama_produk = models.CharField(max_length=255)
-    # kategori_produk = models.ForeignKey(Kategori, on_delete=models.SET_NULL, null=True)
+    kategori_produk = models.ForeignKey(Kategori, on_delete=models.SET_NULL, null=True)
     jumlah_produk = models.PositiveIntegerField()
     deskripsi_produk = models.TextField(blank=True, null=True)
     url_foto_produk = models.URLField(blank=True, null=True)
     harga_diajukan = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='diajukan')
     created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
