@@ -36,14 +36,14 @@ class ProdukViewSet(viewsets.ModelViewSet):
     def detail_produk(self, request, pk=None):
         produk = get_object_or_404(Produk, pk=pk, is_deleted=False)
         serializer = self.get_serializer(produk)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['delete'])
     def hapus_produk(self, request, pk=None):
         produk = get_object_or_404(Produk, pk=pk, is_deleted=False)
         produk.is_deleted = True
         produk.save()
-        return Response({"message": "Produk berhasil dihapus (soft delete)"}, status=200)
+        return Response(status=status.HTTP_200_OK)
 
 class KategoriViewSet(viewsets.ModelViewSet):
     required_permission = 'staff_permission'
