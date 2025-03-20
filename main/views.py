@@ -80,6 +80,13 @@ class LoginView(APIView):
         
         if user:
             refresh = RefreshToken.for_user(user)
+            
+            # Add custom claims to the token
+            refresh['role'] = user.role  # Add role to the refresh token
+            refresh['name'] = user.username
+            refresh.access_token['role'] = user.role  # Add role to the access token
+            refresh.access_token['name'] = user.username  # Add role to the access token
+            
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
