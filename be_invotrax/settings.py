@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'pengajuan_penawaran_pengadaan',
+    'manajemen_stok',
+    'penawaran_pengadaan',
     # Third-party apps
     'rest_framework',
     'corsheaders',
