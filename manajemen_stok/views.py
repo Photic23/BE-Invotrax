@@ -55,6 +55,11 @@ class KategoriViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:  # Jika hanya ingin mengizinkan view list atau retrieve
+            self.required_permission = 'view_own_profile'
+        return super().get_permissions()
 
     @action(detail=True, methods=['patch'])
     def update_kategori(self, request, pk=None):
