@@ -141,8 +141,17 @@ class UserManagementView(APIView):
     required_permission = 'manage_staff'
     permission_classes = [HasRolePermission]
     
-    def get(self, request):
-        # List all users - filtered by role if specified
+    def get(self, request, user_id=None):
+        # If user_id is provided, retrieve specific user
+        if user_id is not None:
+            try:
+                user = User.objects.get(id=user_id)
+                serializer = UserSerializer(user)
+                return Response(serializer.data)
+            except User.DoesNotExist:
+                return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Otherwise, list all users - filtered by role if specified
         role = request.query_params.get('role', None)
         
         if role:

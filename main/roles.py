@@ -12,6 +12,7 @@ class Vendor(AbstractUserRole):
         'vendor_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
+        'manage_staff': True,
     }
 
 class Staff(AbstractUserRole):
@@ -27,6 +28,7 @@ class Manager(AbstractUserRole):
         'manager_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
+        'manage_staff': True,
     }
 
 class Admin(AbstractUserRole):
