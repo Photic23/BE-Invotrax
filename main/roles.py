@@ -7,6 +7,7 @@ class customer(AbstractUserRole):
         'edit_own_profile' : True,
         'manage_staff': True,
         'system_settings': True,
+        'staff_permission': True,
     }
 
 class vendor(AbstractUserRole):
@@ -16,6 +17,7 @@ class vendor(AbstractUserRole):
         'edit_own_profile' : True,
         'manage_staff': True,
         'system_settings': True,
+        'staff_permission': True,
     }
 
 class staff(AbstractUserRole):
@@ -25,6 +27,7 @@ class staff(AbstractUserRole):
         'edit_own_profile' : True,
         'manage_staff': True,
         'system_settings': True,
+        'staff_permission': True,
     }
 
 class manager(AbstractUserRole):
@@ -34,6 +37,7 @@ class manager(AbstractUserRole):
         'edit_own_profile' : True,
         'manage_staff': True,
         'system_settings': True,
+        'staff_permission': True,
     }
 
 class admin(AbstractUserRole):
@@ -43,4 +47,5 @@ class admin(AbstractUserRole):
         'edit_own_profile' : True,
         'manage_staff': True,
         'system_settings': True,
+        'staff_permission': True,
     }
