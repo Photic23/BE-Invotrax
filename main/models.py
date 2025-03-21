@@ -35,11 +35,11 @@ class CustomUser(AbstractUser):
         # Clear existing roles first
         clear_roles(self)
         
-        # Assign new role
+        # Assign new role - use proper capitalization to match your role classes
         if self.role == 'customer':
-            assign_role(self, 'customer')
+            assign_role(self, 'customer')  # Capital 'C' to match the class name
         elif self.role == 'vendor':
-            assign_role(self, 'vendor')
+            assign_role(self, 'vendor')    # Capital 'V'
         elif self.role == 'staff':
             assign_role(self, 'staff')
         elif self.role == 'manager':
