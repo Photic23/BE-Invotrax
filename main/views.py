@@ -138,7 +138,7 @@ class UserProfileView(APIView):
 
 # Admin views for user management
 class UserManagementView(APIView):
-    required_permission = 'manage_staff'
+    required_permission = 'all_permission'
     permission_classes = [HasRolePermission]
     
     def get(self, request, user_id=None):

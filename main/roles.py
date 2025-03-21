@@ -1,37 +1,42 @@
 from rolepermissions.roles import AbstractUserRole
 
-class Customer(AbstractUserRole):
+class customer(AbstractUserRole):
     available_permissions = {
-        'cust_permission': True,
-        'view_own_profile': True,
-        'edit_own_profile' : True,
-    }
-
-class Vendor(AbstractUserRole):
-    available_permissions = {
-        'vendor_permission': True,
+        'all_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
         'manage_staff': True,
+        'system_settings': True,
     }
 
-class Staff(AbstractUserRole):
+class vendor(AbstractUserRole):
     available_permissions = {
-        'staff_permission': True,
+        'all_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
         'manage_staff': True,
+        'system_settings': True,
     }
 
-class Manager(AbstractUserRole):
+class staff(AbstractUserRole):
     available_permissions = {
-        'manager_permission': True,
+        'all_permission': True,
         'view_own_profile': True,
         'edit_own_profile' : True,
         'manage_staff': True,
+        'system_settings': True,
     }
 
-class Admin(AbstractUserRole):
+class manager(AbstractUserRole):
+    available_permissions = {
+        'all_permission': True,
+        'view_own_profile': True,
+        'edit_own_profile' : True,
+        'manage_staff': True,
+        'system_settings': True,
+    }
+
+class admin(AbstractUserRole):
     available_permissions = {
         'all_permission': True,
         'view_own_profile': True,
