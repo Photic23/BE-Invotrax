@@ -86,6 +86,11 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
+
+CORS_ALLOWED_ORIGINS = [
+    "https://a06-propenchill-fe.vercel.app",
+    # Add any other domains that need access
+]
 # CORS settings - adjust according to your frontend URL
 CORS_ALLOW_ALL_ORIGINS = True
 
