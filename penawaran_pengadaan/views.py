@@ -7,8 +7,8 @@ from .serializers import PenawaranPengadaanSerializer
 from main.permissions import HasRolePermission
 
 class PenawaranPengadaanViewSet(viewsets.ModelViewSet):
-    required_permission = 'vendor_permission'
-    permission_classes = [HasRolePermission]
+    # required_permission = 'vendor_permission'
+    # permission_classes = [HasRolePermission]
 
     queryset = PenawaranPengadaan.objects.filter(is_deleted=False)
     serializer_class = PenawaranPengadaanSerializer
