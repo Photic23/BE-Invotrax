@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from rest_framework import viewsets, permissions
+=======
+from rest_framework import viewsets, permissions, status
+>>>>>>> 56944cd516d99918d57fd706d540cb744ddfc119
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -26,4 +30,27 @@ class PengajuanPenawaranPengadaanViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+<<<<<<< HEAD
         return Response(serializer.errors, status=400)
+=======
+        return Response(serializer.errors, status=400)
+    
+    def get_detail_pengajuan(self,request, pk):
+        try:
+            pengajuan_penawaran = PengajuanPenawaranPengadaan.objects.get(pk=pk)
+        except PengajuanPenawaranPengadaan.DoesNotExist:
+            return Response({"error": "Pengajuan penawaran pengadaan not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = PengajuanPenawaranPengadaanSerializer(pengajuan_penawaran)
+
+        return Response(serializer.data)
+    
+    def delete_pengajuan(self, request, pk):
+        try:
+            pengajuan_penawaran = PengajuanPenawaranPengadaan.objects.get(pk=pk)
+        except PengajuanPenawaranPengadaan.DoesNotExist:
+            return Response({"error": "Pengajuan penawaran pengadaan not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        pengajuan_penawaran.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+>>>>>>> 56944cd516d99918d57fd706d540cb744ddfc119
