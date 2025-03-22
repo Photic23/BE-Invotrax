@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'pengajuan_penawaran_pengadaan',
     'manajemen_stok',
     'penawaran_pengadaan',
     # Third-party apps
@@ -85,6 +86,11 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
+
+CORS_ALLOWED_ORIGINS = [
+    "https://a06-propenchill-fe.vercel.app",
+    # Add any other domains that need access
+]
 # CORS settings - adjust according to your frontend URL
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -120,7 +126,7 @@ WSGI_APPLICATION = 'be_invotrax.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Switch default db to supabase
+# # Switch default db to supabase
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
