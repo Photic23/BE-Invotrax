@@ -47,7 +47,8 @@ jobs:
         
         # Setup SSH
         mkdir -p ~/.ssh
-        echo -e "Host $LIGHTHOUSE_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+        echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+        chmod 600 ~/.ssh/config
         
         # Deploy code
         sshpass -p "123ytrewq" ssh propenchill@$LIGHTHOUSE_HOST "mkdir -p /home/propenchill/propenchill"
