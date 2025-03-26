@@ -26,23 +26,13 @@ jobs:
         pip install -r requirements.txt
         python manage.py collectstatic --noinput
         python manage.py check --deploy
-    
-    - uses: actions/upload-artifact@v3
-      with:
-        name: django-app
-        path: |
-          ${{ github.workspace }}
-        retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: django-app
-        path: ${{ github.workspace }}
-
+    - uses: actions/checkout@v3
+    
     - name: Deploy to server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
