@@ -31,16 +31,18 @@ jobs:
       with:
         name: django-app
         path: |
-          staticfiles/
-          .
+          ${{ github.workspace }}
         retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
+    - uses: actions/download-artifact@v3
+      with:
+        name: django-app
+        path: ${{ github.workspace }}
+
     - name: Deploy to server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
